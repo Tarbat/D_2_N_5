@@ -8,47 +8,64 @@ class HelloWorld
     {
         Random rnd = new Random();
 
-        long n = 10, m, q;
+        long n = 1000*1000, m, q;
         m = n;
         q = n;
+        long Kv = n / 1000;
 
-        long[,] Matrix1 = new long[n, m];
-        long[,] Matrix2 = new long[n, m];
-        long[,] Matrix3 = new long[n, m];
+        long[] Matrix1 = new long[n];
+        long[] Matrix2 = new long[n];
+        long[] Matrix3 = new long[n];
 
-        for (int i = 0; i != n; i++)
+        for (int i = 0; i != Kv; i++)
         {
-            for (int j = 0; j != m; j++)
+            for (int j = 0; j != Kv; j++)
             {
-                Matrix1[i, j] = rnd.Next(0, 3);
-                Console.Write(Matrix1[i, j] + " ");
+                long mj = j + (Kv * i);
+                Matrix1[mj] = rnd.Next(0, 3);
+             //   Console.Write(Matrix1[mj] + " ");
+            } 
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+
+        for (int i = 0; i != Kv; i++)
+        {
+            for (int j = 0; j != Kv; j++)
+            {
+                long mj = j + (Kv * i);
+                Matrix2[mj] = rnd.Next(0, 3);
+             //   Console.Write(Matrix2[mj] + " ");
             }
             Console.WriteLine();
         }
         Console.WriteLine();
 
-        for (int i = 0; i != n; i++)
+        for (int i = 0; i != Kv; i++)
         {
-            for (int j = 0; j != m; j++)
+            for (int j = 0; j != Kv; j++)
             {
-                Matrix2[i, j] = rnd.Next(0, 3);
-                Console.Write(Matrix2[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-
-        for (int i = 0; i != n; i++)
-        {
-            for (int j = 0; j != m; j++)
-            {
-                for (int k = 0; k != q; k++)
-                { 
-                    Matrix3[i, j] = Matrix3[i, j] + (Matrix1[i, k] * Matrix2[k, j]);
+                for (int k = 0; k != Kv; k++)
+                {
+                    long mj = j + (Kv * i);
+                    long qk = k + (Kv * i);
+                    long kq = j + (Kv * k);
+                    Matrix3[mj] = Matrix3[mj] + (Matrix1[qk] * Matrix2[kq]);
                 }
-                Console.Write(Matrix3[i, j] + " ");
+                //Console.Write(Matrix3[i, j] + " ");
             }
             Console.WriteLine();
         }
+
+        for (int i = 0; i != 3; i++)
+        {
+            for (int j = 0; j != 3; j++)
+            {
+                long mj = j + (Kv * i);
+                Console.Write(Matrix3[mj] + " ");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
     }
 }
